@@ -1,11 +1,10 @@
-Start-OSDCloud -OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -ZTI
+Start-OSDCloud -OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Enterprise -SkipAutopilot -ZTI
 
-mkdir c:\temp
-copy c:\OSDCloud\Logs\*.log c:\temp\ /y
-rmdir /s /q c:\OSDCloud
-rmdir /s /q c:\Drivers
+if (!(Test-Path c:\temp)){New-Item -ItemType Directory -Force -Path "C:\temp"}
+Copy-Item -Path c:\OSDCloud\Logs\*.log -Destination c:\temp\ -Force
+Remove-Item -Path C:\OSDCloud\ -Recurse
+Remove-Item -Path C:\Drivers\ -Recurse
 
 wpeutil reboot
 
-#-OSBuild 22H2 
 
