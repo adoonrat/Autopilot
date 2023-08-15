@@ -33,4 +33,4 @@ If($FileName -eq $OSCache.Name)
 
 
 
-Expand-WindowsImage -ApplyPath "C:\" -ImagePath $ImagePath -Index 6 -ScratchDirectory "C:\OSDCloud\Temp"
+Expand-WindowsImage -ApplyPath "C:\" -ImagePath "$ImagePath" -Index 6 -ScratchDirectory "C:\OSDCloud\Temp"
