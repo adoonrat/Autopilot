@@ -18,7 +18,7 @@ If(!(Test-Path -Path $OSCacheLocation))
 $OSCache = ls $OSCacheLocation
 
 $ImagePath = "$OSCacheLocation"+"$FileName"
-Write-Host $ImagePath
+Write-Host $ImagePath 
 
 If($FileName -eq $OSCache.Name)
     {Write-Host "Image cache is a good version"}
