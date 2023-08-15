@@ -1,32 +1,28 @@
-
-
-
-
 $OSVersion = 'Windows 10'
 $OSReleaseID = "22H2"
 
-$GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,$Global:FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+$GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
 
-$Global:FileUri = $GetOSInfo.FileUri.AbsoluteUri
-$Global:FileName = $GetOSInfo.FileName
+$FileUri = $GetOSInfo.FileUri.AbsoluteUri
+$FileName = $GetOSInfo.FileName
 
 
-$Global:OSCacheLocation = "E:\OS\"
-If(!(Test-Path -Path $Global:OSCacheLocation))
+$OSCacheLocation = "E:\OS\"
+If(!(Test-Path -Path $OSCacheLocation))
     {
-        Mkdir $Global:OSCacheLocation
+        Mkdir $OSCacheLocation
     }
  
 
 ###Check OS file version####
-$OSCache = ls $Global:OSCacheLocation
-If($Global:FileName -eq $OSCache.Name)
+$OSCache = ls $OSCacheLocation
+If($FileName -eq $OSCache.Name)
     {Write-Host "Image cache is a good version"}
     Else
     {
-        Remove-Item -Path $Global:OSCacheLocation -Recurse -Force
+        Remove-Item -Path $OSCacheLocation -Recurse -Force
         Write-Host "Download Latest image"
-        Save-WebFile -SourceUrl $Global:FileUri -DestinationDirectory $Global:OSCacheLocation -DestinationName $Global:FileName -ErrorAction Stop
+        Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
         
         
     }
@@ -44,8 +40,8 @@ $ParamNewItem = @{
 
         $ExpandWindowsImage = @{
             ApplyPath = 'C:\'
-            $ImagePath = "$Global:OSCacheLocation"+"$Global:FileName"
-            Index = 6
+            $ImagePath = "$OSCacheLocation"+"$FileName"
+            Index = 3
             ScratchDirectory = 'C:\OSDCloud\Temp'
             ErrorAction = 'Stop'
         }
