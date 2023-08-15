@@ -17,15 +17,10 @@
             }
         
  
- 
- 
- Clear-LocalDisk -Force -NoResults -ErrorAction Stop
-
-
+Clear-LocalDisk -Force -NoResults -Confirm:$false -ErrorAction Stop
 Write-host "New-OSDisk"
 
-
-       
+     
                 Start-OSDDiskPart
                 Write-Host "=========================================================================" -ForegroundColor Cyan
                 Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
