@@ -11,7 +11,7 @@ $FileUri = $GetOSInfo.FileUri.AbsoluteUri
 $FileName = $GetOSInfo.FileName
 
 
-$OSCacheLocation = "W:\temp\MyOSDCloud\OS\"
+$OSCacheLocation = "E:\OS\"
 If(!(Test-Path -Path $OSCacheLocation))
     {
         Mkdir $OSCacheLocation
@@ -32,21 +32,21 @@ If($FileName -eq $OSCache.Name)
     }
 
 $ParamNewItem = @{
-            Path = 'W:\OSDCloud\Temp'
+            Path = 'C:\OSDCloud\Temp'
             ItemType = 'Directory'
             Force = $true
             ErrorAction = 'Stop'
         }
-        if (-NOT (Test-Path 'W:\OSDCloud\Temp')) {
+        if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
             Write-DarkGrayHost -Message 'Creating ScratchDirectory W:\OSDCloud\Temp'
             $null = New-Item @ParamNewItem
         }
 
         $ExpandWindowsImage = @{
-            ApplyPath = 'W:\'
+            ApplyPath = 'C:\'
             $ImagePath = "$OSCacheLocation"+"$FileName"
             Index = 3
-            ScratchDirectory = 'W:\OSDCloud\Temp'
+            ScratchDirectory = 'C:\OSDCloud\Temp'
             ErrorAction = 'Stop'
         }
         $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
