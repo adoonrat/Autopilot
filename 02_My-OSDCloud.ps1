@@ -27,6 +27,8 @@ If($FileName -eq $OSCache.Name)
         Remove-Item -Path $OSCacheLocation -Recurse -Force
         Write-Host "Download Latest image"
         Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+        
+        
     }
 
 $ParamNewItem = @{
@@ -42,8 +44,8 @@ $ParamNewItem = @{
 
         $ExpandWindowsImage = @{
             ApplyPath = 'C:\'
-            ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
-            Index = $Global:OSDCloud.OSImageIndex
+            $ImagePath = "$OSCacheLocation"+"$FileName"
+            Index = 3
             ScratchDirectory = 'C:\OSDCloud\Temp'
             ErrorAction = 'Stop'
         }
