@@ -11,7 +11,7 @@ $FileUri = $GetOSInfo.FileUri.AbsoluteUri
 $FileName = $GetOSInfo.FileName
 
 
-$OSCacheLocation = "C:\temp\MyOSDCloud\OS\"
+$OSCacheLocation = "W:\temp\MyOSDCloud\OS\"
 If(!(Test-Path -Path $OSCacheLocation))
     {
         Mkdir $OSCacheLocation
