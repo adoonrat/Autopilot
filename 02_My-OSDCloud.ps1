@@ -37,8 +37,8 @@ $ParamNewItem = @{
             Force = $true
             ErrorAction = 'Stop'
         }
-        if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
-            Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
+        if (-NOT (Test-Path 'W:\OSDCloud\Temp')) {
+            Write-DarkGrayHost -Message 'Creating ScratchDirectory W:\OSDCloud\Temp'
             $null = New-Item @ParamNewItem
         }
 
