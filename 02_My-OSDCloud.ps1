@@ -8,7 +8,7 @@ $OSReleaseID = "22H2"
 $GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,$Global:FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
 
 $Global:FileUri = $GetOSInfo.FileUri.AbsoluteUri
-$Global:$Global:FileName = $GetOSInfo.$Global:FileName
+$Global:FileName = $GetOSInfo.$Global:FileName
 
 
 $Global:OSCacheLocation = "E:\OS\"
