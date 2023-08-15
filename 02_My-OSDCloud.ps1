@@ -16,6 +16,10 @@ If(!(Test-Path -Path $OSCacheLocation))
 
 ###Check OS file version####
 $OSCache = ls $OSCacheLocation
+
+$ImagePath = "$OSCacheLocation"+"$FileName"
+Write-Host $ImagePath
+
 If($FileName -eq $OSCache.Name)
     {Write-Host "Image cache is a good version"}
     Else
@@ -28,6 +32,5 @@ If($FileName -eq $OSCache.Name)
     }
 
 
-$ImagePath = "$OSCacheLocation"+"$FileName"
-Write-Host $ImagePath
+
 Expand-WindowsImage -ApplyPath "C:\" -ImagePath $ImagePath -Index 6 -ScratchDirectory "C:\OSDCloud\Temp"
