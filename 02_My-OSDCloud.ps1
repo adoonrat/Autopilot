@@ -32,7 +32,7 @@ If($FileName -eq $OSCache.Name)
     }
 
 $ParamNewItem = @{
-            Path = 'C:\OSDCloud\Temp'
+            Path = 'W:\OSDCloud\Temp'
             ItemType = 'Directory'
             Force = $true
             ErrorAction = 'Stop'
@@ -43,10 +43,10 @@ $ParamNewItem = @{
         }
 
         $ExpandWindowsImage = @{
-            ApplyPath = 'C:\'
+            ApplyPath = 'W:\'
             $ImagePath = "$OSCacheLocation"+"$FileName"
             Index = 3
-            ScratchDirectory = 'C:\OSDCloud\Temp'
+            ScratchDirectory = 'W:\OSDCloud\Temp'
             ErrorAction = 'Stop'
         }
         $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
