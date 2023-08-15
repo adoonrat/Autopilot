@@ -26,11 +26,7 @@ If($FileName -eq $OSCache.Name)
         Remove-Item -Path $OSCacheLocation -Recurse -Force
         Write-Host "Download Latest image"
         Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
-        
-        
     }
 
-$ImagePath = Get-Item $OSCacheLocation | Select-Object -First 1 | Select-Object -First 1
-Write-Host $ImagePath 
-
-Expand-WindowsImage -ApplyPath "C:\" -ImagePath $ImagePath -Index 6 -ScratchDirectory "C:\OSDCloud\Temp"
+$ImageFile = "$OSCacheLocation"+"$FileName"
+dism /apply-image /imagefile:$Imagefile /index:6 /applydir:c:\
