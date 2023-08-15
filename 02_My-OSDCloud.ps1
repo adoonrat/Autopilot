@@ -27,26 +27,6 @@ If($FileName -eq $OSCache.Name)
         
     }
 
-$ParamNewItem = @{
-            Path = 'C:\OSDCloud\Temp'
-            ItemType = 'Directory'
-            Force = $true
-            ErrorAction = 'Stop'
-        }
-        if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
-            Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
-            $null = New-Item @ParamNewItem
-        }
 
-        $ExpandWindowsImage = @{
-            ApplyPath = 'C:\'
-            $ImagePath = "$OSCacheLocation"+"$FileName"
-            Index = 3
-            ScratchDirectory = 'C:\OSDCloud\Temp'
-            ErrorAction = 'Stop'
-        }
-        $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
-        if ($Global:OSDCloud.IsWinPE -eq $true) {
-            Write-DarkGrayHost -Message 'Expand-WindowsImage'
-            Expand-WindowsImage @ExpandWindowsImage
-        }
+$ImagePath = "$OSCacheLocation"+"$FileName"
+Expand-WindowsImage -ApplyPath "C:\" -ImagePath $ImagePath -Index 6 -ScratchDirectory "C:\OSDCloud\Temp"
