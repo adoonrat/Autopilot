@@ -4,7 +4,8 @@
 
             
                 foreach ($USBPartition in $USBPartitions) {
-
+                    if($USBPartition.DriveLetter -ne $null)
+                   {
                     $RemovePartitionAccessPath = @{
                         AccessPath = "$($USBPartition.DriveLetter):"
                         DiskNumber = $USBPartition.DiskNumber
@@ -13,6 +14,7 @@
 
                     Remove-PartitionAccessPath @RemovePartitionAccessPath -ErrorAction Stop
                     Start-Sleep -Seconds 3
+                }
                 }
             }
         
