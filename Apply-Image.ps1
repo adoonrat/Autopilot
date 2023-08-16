@@ -13,7 +13,7 @@ $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 $imagefolder = ls "E:\OS"
 $imagefile = $imagefolder.Name
-$imagefile = "E:\" + $imagefile
+$imagefile = "E:\OS" + $imagefile
 
 #Functions
 function Write-Log {
