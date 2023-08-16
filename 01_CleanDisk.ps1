@@ -40,11 +40,8 @@ gpt attributes=0x8000000000000001
 list volume
 exit
 "@
-Start-Sleep -Seconds 2
 
-Write-output $command | Out-File x:\cleardisk.prt
-diskpart /s x:\cleardisk.prt
-#$command | Diskpart
+$command | Diskpart
 
 
         #region Add-PartitionAccessPath
