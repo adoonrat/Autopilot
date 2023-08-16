@@ -1,6 +1,33 @@
 
+#Functions
+function Write-Log {
+
+    Param (
+        [Parameter(Mandatory = $true)]
+        [string]$Message,
+        [switch]$fail
+    )
+	
+    If ((Test-Path $LogFilePath) -eq $false) {
+        mkdir $LogFilePath
+    }
+	
+    $time = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+    $time + '...' + $Message | Out-File -FilePath $logfilename -Append
+    if ($fail) {
+        Write-Host $Message -ForegroundColor Red
+    }
+    else {
+        Write-Host $Message
+    }
+
+}
+
+
+
+function Driver-Download {
     #Download Catalog file
-   
+    ipconfig
 
     $usb = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
     $source = "http://downloads.dell.com/catalog/DriverPackCatalog.cab"
@@ -93,7 +120,7 @@
     catch {
         Write-log "Error copy cab file"
     } #>
-    $global:foldermodel = "C:\Drivers"
+    $global:foldermodel = "W:\Drivers"
     if (!(test-path "$global:foldermodel")) {
         Write-Log "Extracting Dell Cab to C:\Drivers" #Note it's W:\ in WinPE
         mkdir $global:foldermodel | out-null
@@ -103,3 +130,9 @@
         start-process -filepath $destination -argumentlist "/s /e=$global:foldermodel" -Wait
     	}
 
+}
+
+###### END Driver-Download Function
+
+
+Driver-Download
