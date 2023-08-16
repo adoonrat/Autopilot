@@ -42,7 +42,9 @@ exit
 "@
 Start-Sleep -Seconds 2
 
-$command | Diskpart
+Write-output $command | Out-File x:\cleardisk.prt
+diskpart /s x:\cleardisk.prt
+#$command | Diskpart
 
 
         #region Add-PartitionAccessPath
