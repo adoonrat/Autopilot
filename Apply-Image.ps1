@@ -11,9 +11,10 @@ $dest = "C:\Dell"
 $stopwatch = [system.diagnostics.stopwatch]::StartNew()
 $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
-$imagefolder = ls "E:\OS"
+
+$imagefolder = ls "$data\OS"
 $imagefile = $imagefolder.Name
-$imagefile = "E:\OS\" + $imagefile
+$imagefile = "$data\OS\" + $imagefile
 
 #Functions
 function Write-Log {
