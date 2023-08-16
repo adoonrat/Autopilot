@@ -40,6 +40,8 @@ gpt attributes=0x8000000000000001
 list volume
 exit
 "@
+Start-Sleep -Seconds 2
+
 $command | Diskpart
 
 
