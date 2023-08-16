@@ -30,6 +30,7 @@ function Write-Log {
     }
 
 }
+
 #Apply Image
 
 $imagefolder = ls "$data\OS"
