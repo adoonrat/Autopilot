@@ -1,6 +1,6 @@
-function Driver-Download {
+
     #Download Catalog file
-    #ipconfig
+   
 
     $usb = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
     $source = "http://downloads.dell.com/catalog/DriverPackCatalog.cab"
@@ -103,5 +103,3 @@ function Driver-Download {
         start-process -filepath $destination -argumentlist "/s /e=$global:foldermodel" -Wait
     	}
 
-}
-Driver-Download
