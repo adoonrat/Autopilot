@@ -181,6 +181,7 @@ exit
 "@
 $command | Diskpart
 
+<#
 #Run Dell Specific Items
 $Make = (Get-WmiObject -Class Win32_ComputerSystem).Manufacturer
 if ($make -like "Dell*") {
@@ -228,7 +229,7 @@ if ($make -like "Dell*") {
 
 
 
-}
+}#>
 
 #Apply Image - Enterprise is Index 3
 try {
@@ -267,7 +268,7 @@ catch {
     exit
 }
 
-
+<#
 # Copy the Windows RE image to the    Windows RE Tools partition
 try {
     Write-Log "Copying WinRE" 
@@ -331,3 +332,4 @@ catch {
 }
 
 wpeutil reboot
+#>
