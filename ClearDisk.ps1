@@ -4,8 +4,7 @@
 
             
                 foreach ($USBPartition in $USBPartitions) {
-                    if($USBPartition.DriveLetter -ne $null)
-                   {
+                   
                     $RemovePartitionAccessPath = @{
                         AccessPath = "$($USBPartition.DriveLetter):"
                         DiskNumber = $USBPartition.DiskNumber
@@ -15,7 +14,7 @@
                     Remove-PartitionAccessPath @RemovePartitionAccessPath -ErrorAction Stop
                     Start-Sleep -Seconds 3
                 }
-                }
+                
             }
         
  
@@ -54,7 +53,7 @@ Write-host "New-OSDisk"
         if ($USBPartitions) {
             Write-SectionHeader 'Restoring USB Drive Letters'
 
-            if ($Global:OSDCloud.IsWinPE -eq $true) {
+         
                 foreach ($USBPartition in $USBPartitions) {
 
                     $ParamAddPartitionAccessPath = @{
@@ -64,5 +63,5 @@ Write-host "New-OSDisk"
                     }
                     Add-PartitionAccessPath @ParamAddPartitionAccessPath; Start-Sleep -Seconds 5
                 }
-            }
+            
         }
