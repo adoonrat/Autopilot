@@ -1,21 +1,4 @@
- $USBPartitions = Get-USBPartition
-        if ($USBPartitions) {
-            Write-host "Removing USB drive letters"
 
-            
-                foreach ($USBPartition in $USBPartitions) {
-                   
-                    $RemovePartitionAccessPath = @{
-                        AccessPath = "$($USBPartition.DriveLetter):"
-                        DiskNumber = $USBPartition.DiskNumber
-                        PartitionNumber = $USBPartition.PartitionNumber
-                    }
-
-                    Remove-PartitionAccessPath @RemovePartitionAccessPath -ErrorAction Stop
-                    Start-Sleep -Seconds 3
-                }
-                
-            }
         
 Write-Host "Formatting Drive"
 $command = @"
@@ -39,21 +22,3 @@ list volume
 exit
 "@
 $command | Diskpart
-
- 
-        #region Add-PartitionAccessPath
-        if ($USBPartitions) {
-           # Write-SectionHeader 'Restoring USB Drive Letters'
-
-         
-                foreach ($USBPartition in $USBPartitions) {
-
-                    $ParamAddPartitionAccessPath = @{
-                        AssignDriveLetter = $true
-                        DiskNumber = $USBPartition.DiskNumber
-                        PartitionNumber = $USBPartition.PartitionNumber
-                    }
-                    Add-PartitionAccessPath @ParamAddPartitionAccessPath; Start-Sleep -Seconds 5
-                }
-            
-        }
