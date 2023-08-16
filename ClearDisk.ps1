@@ -48,7 +48,7 @@ Write-host "New-OSDisk"
             }
         
         #endregion
-        
+        #>
         #region Add-PartitionAccessPath
         if ($USBPartitions) {
            # Write-SectionHeader 'Restoring USB Drive Letters'
@@ -65,4 +65,4 @@ Write-host "New-OSDisk"
                 }
             
         }
-#>
+
