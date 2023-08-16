@@ -51,7 +51,7 @@ Write-host "New-OSDisk"
         
         #region Add-PartitionAccessPath
         if ($USBPartitions) {
-            Write-SectionHeader 'Restoring USB Drive Letters'
+           # Write-SectionHeader 'Restoring USB Drive Letters'
 
          
                 foreach ($USBPartition in $USBPartitions) {
