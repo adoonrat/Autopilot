@@ -181,6 +181,7 @@ exit
 "@
 $command | Diskpart
 
+ Driver-Download
 <#
 #Run Dell Specific Items
 $Make = (Get-WmiObject -Class Win32_ComputerSystem).Manufacturer
