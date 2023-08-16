@@ -93,7 +93,7 @@ function Driver-Download {
     catch {
         Write-log "Error copy cab file"
     } #>
-    $global:foldermodel = "W:\Drivers"
+    $global:foldermodel = "C:\Drivers"
     if (!(test-path "$global:foldermodel")) {
         Write-Log "Extracting Dell Cab to C:\Drivers" #Note it's W:\ in WinPE
         mkdir $global:foldermodel | out-null
