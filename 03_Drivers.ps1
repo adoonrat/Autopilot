@@ -113,7 +113,8 @@ function Driver-Download {
         }
         try {
             Write-Log "Driver cab missing from USB. Downloading Dell Driver pack for $model..."
-            Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
+            #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
+	    Save-WebFile -SourceUrl $cabsource -DestinationDirectory $destination -ErrorAction Stop
         }
         catch {
             write-log "Ran into an issue: $PSItem" -fail
