@@ -17,7 +17,7 @@
                 
             }
         
- 
+ <#
 Clear-LocalDisk -Force -NoResults -Confirm:$false -ErrorAction Stop
 Write-host "New-OSDisk"
 
@@ -65,3 +65,4 @@ Write-host "New-OSDisk"
                 }
             
         }
+#>
