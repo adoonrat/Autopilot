@@ -13,6 +13,7 @@ $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 $imagefolder = ls "E:\OS"
 $imagefile = $imagefolder.Name
+$imagefile = "E:\" + $imagefile
 
 #Functions
 function Write-Log {
@@ -235,7 +236,7 @@ if ($make -like "Dell*") {
 #Apply Image - Enterprise is Index 3
 try {
     Write-Log "Applying Image"
-    dism /Apply-Image /ImageFile:$imagefile /Index:3 /ApplyDir:W:\
+    dism /Apply-Image /ImageFile:$imagefile /Index:6 /ApplyDir:W:\
 }
 catch {
     write-log "Ran into an issue: $PSItem" -fail
