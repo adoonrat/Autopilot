@@ -30,3 +30,7 @@ If($FileName -eq $OSCache.Name)
 
 $ImageFile = "$OSCacheLocation"+"$FileName"
 dism /apply-image /imagefile:$Imagefile /index:6 /applydir:c:\
+
+
+
+Invoke-Exe C:\Windows\System32\bcdboot.exe C:\Windows /v /c
