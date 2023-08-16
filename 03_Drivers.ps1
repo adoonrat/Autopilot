@@ -1,3 +1,13 @@
+Add-Type -AssemblyName PresentationCore, PresentationFramework
+
+#Variable Section
+$date = (Get-Date).ToString('yyyy-MM-dd')
+$LogFilePath = $env:TEMP
+$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
+$dest = "C:\Dell"
+$stopwatch = [system.diagnostics.stopwatch]::StartNew()
+$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
 #Functions
 function Write-Log {
@@ -120,7 +130,7 @@ function Driver-Download {
     catch {
         Write-log "Error copy cab file"
     } #>
-    $global:foldermodel = "W:\Drivers"
+    $global:foldermodel = "C:\Drivers"
     if (!(test-path "$global:foldermodel")) {
         Write-Log "Extracting Dell Cab to C:\Drivers" #Note it's W:\ in WinPE
         mkdir $global:foldermodel | out-null
