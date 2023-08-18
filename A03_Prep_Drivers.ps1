@@ -39,12 +39,31 @@ function Driver-Download {
     #Download Catalog file
     ipconfig
 
-    $usb = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+$FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
+	if($FindUSBVolume -ne $null)
+ 		{
+   			$FindUSBVolume = ($FindUSBVolume.DriveLetter+":")
+      		}
+	Else
+ 		{
+			$FindUSBVolume = $False
+   		}
+
+	if ($FindUSBVolume -ne $False)
+ 		{
+			$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+			$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
+   		}
+	Else
+ 		{
+			$data = "W:"
+   		}
+    #$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
     $source = "http://downloads.dell.com/catalog/DriverPackCatalog.cab"
-    $catalog = "$usb\Dell\DriverPackCatalog.cab"
+    $catalog = "$data\Dell\DriverPackCatalog.cab"
     Write-Log "Downloading driver catalog file from $source"
-    if (!(Test-Path "$usb\Dell\")) {
-        mkdir "$usb\Dell\"
+    if (!(Test-Path "$data\Dell\")) {
+        mkdir "$data\Dell\"
     }
     try {
         Invoke-WebRequest -URi $source -OutFile $catalog -Verbose
@@ -55,7 +74,7 @@ function Driver-Download {
                 
     }
     #parse Catalog file
-    $catalogXMLFile = "$usb\Dell\DriverPackCatalog.xml"
+    $catalogXMLFile = "$data\Dell\DriverPackCatalog.xml"
     Write-Log "Expanding catalog cab file..."
     try {
         EXPAND $catalog $catalogXMLFile
@@ -78,8 +97,8 @@ function Driver-Download {
     Write-Log "Source Cab download location: $cabsource"
     $Filename = [System.IO.Path]::GetFileName($cabsource)
 
-    $folder = $usb + "\Dell\$model"
-    $destination = $usb + "\Dell\$model\" + $Filename
+    $folder = $data + "\Dell\$model"
+    $destination = $data + "\Dell\$model\" + $Filename
 
     Write-Log "Destination download location: $destination"
 
