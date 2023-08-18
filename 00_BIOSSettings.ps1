@@ -2,17 +2,17 @@ Import-Module DellBIOSProvider
 Add-Type -AssemblyName PresentationFramework
 $SataMode = dir DellSmbios:\SystemConfiguration\EmbSataRaid | Select -ExpandProperty CurrentValue
 
-function BIOSSetingMsgbox ()
+function Msgbox ($msg)
 {
     
-  $msgBoxInput =  [System.Windows.MessageBox]::Show('Sata mode is not set to Ahci, please review BIOS settings before attempting to deploy. Press OK to restart.', 'Confirmation', 'OK','Error')
+  $msgBoxInput =  [System.Windows.MessageBox]::Show($msg, 'Confirmation', 'OK','Error')
 
   switch  ($msgBoxInput) {
 
       'OK' {
           	## Action Here
             Write-Host "Sata mode not set to Ahci, review all BIOS settings. Rebooting...."
-	          wpeutil reboot
+	          #wpeutil reboot
             # Exit 69
           }
     }
@@ -40,9 +40,11 @@ $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
 
 if(-not($Model -in $SupportModels))
 
-{Write-Host "Not support model"}
+{Msgbox("This device is not a support model. Press OK to acknowledge and shutdown."
+wpeutil shutdown)
 
 
 If ($SataMode -ne "Ahci")
-    {BIOSSetingMsgbox}
+    {Msgbox("Sata mode is not set to Ahci, please review BIOS settings before attempting to deploy. Press OK to restart.")
+    wpeutil reboot}
 
