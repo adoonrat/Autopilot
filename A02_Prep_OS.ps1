@@ -1,4 +1,3 @@
-$version = "1.5"
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 #Variable Section
@@ -28,9 +27,6 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 			$data = "W:"
    		}
 
-#$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
-#$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
-
 #Functions
 function Write-Log {
 
@@ -55,10 +51,6 @@ function Write-Log {
 
 }
 
-#$imagefolder = ls "$data\OS"
-#$imagefile = $imagefolder.Name
-#$imagefile = "$data\OS\" + $imagefile
-
 $OSVersion = 'Windows 10'
 $OSReleaseID = "22H2"
 
@@ -77,8 +69,6 @@ If(!(Test-Path -Path $OSCacheLocation))
 
 ###Check OS file version####
 $OSCache = ls $OSCacheLocation
-
-
 
 If($FileName -eq $OSCache.Name)
     {Write-Host "Cache Image is a good version"}
