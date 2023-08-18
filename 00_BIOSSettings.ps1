@@ -43,7 +43,7 @@ $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
 if(-not($Model -in $SupportModels))
 	{
  		Msgbox("This device is not a support model. Press OK to acknowledge and shutdown.")
-		wpeutil shutdown
+		#wpeutil shutdown
 	}
 
 
@@ -52,7 +52,7 @@ If ($SataMode -ne "Ahci")
      		If ($SataMode -ne $null)
 		{
     		Msgbox("Sata mode is not set to Ahci, please review BIOS settings before attempting to deploy. Press OK to restart.")
-    		wpeutil reboot
+    		#wpeutil reboot
       		}
 	}
 
