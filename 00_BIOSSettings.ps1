@@ -19,6 +19,30 @@ function BIOSSetingMsgbox ()
 
 }
 
+
+$SupportModels = @(
+"Latitude 5410",
+"Latitude 5420",
+"Latitude 5430",
+"Latitude 5440",
+"Latitude 7330",
+"Latitude 7340",
+"Precision 3550",
+"Precision 3560",
+"Precision 3570",
+"Precision 3571",
+"Precision 3580"
+
+)
+
+
+$Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
+
+if(-not($Model -in $SupportModels))
+
+{Write-Host "Not support model"}
+
+
 If ($SataMode -ne "Ahci")
     {BIOSSetingMsgbox}
 
