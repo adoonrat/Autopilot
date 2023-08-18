@@ -7,8 +7,20 @@ $LogFilePath = $env:TEMP
 $logfilename = "$LogFilePath\$date" + "_ImageApply.log"
 $dest = "C:\Dell"
 $stopwatch = [system.diagnostics.stopwatch]::StartNew()
-$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
-$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
+
+$FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
+	if (Test-Path ($FindUSBVolume.DriveLetter+":")
+ 		{
+			$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+			$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
+   		}
+	Else
+ 		{
+			$data = "W:"
+   		}
+
+#$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+#$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
 $imagefolder = ls "$data\OS"
 $imagefile = $imagefolder.Name
@@ -68,10 +80,3 @@ If($FileName -eq $OSCache.Name)
         Write-Host "Download Latest image"
         Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
     }
-
-#$ImageFile = "$OSCacheLocation"+"$FileName"
-#dism /apply-image /imagefile:$Imagefile /index:6 /applydir:c:\
-
-
-
-#Invoke-Exe C:\Windows\System32\bcdboot.exe C:\Windows /v /c
