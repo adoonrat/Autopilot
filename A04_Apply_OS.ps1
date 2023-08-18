@@ -4,8 +4,8 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
 $date = (Get-Date).ToString('yyyy-MM-dd')
 $LogFilePath = $env:TEMP
 $logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
-$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
+#$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+#$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
 #Functions
 function Write-Log {
