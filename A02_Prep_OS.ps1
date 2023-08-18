@@ -31,10 +31,6 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 #$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 #$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
-$imagefolder = ls "$data\OS"
-$imagefile = $imagefolder.Name
-$imagefile = "$data\OS\" + $imagefile
-
 #Functions
 function Write-Log {
 
@@ -59,6 +55,9 @@ function Write-Log {
 
 }
 
+#$imagefolder = ls "$data\OS"
+#$imagefile = $imagefolder.Name
+#$imagefile = "$data\OS\" + $imagefile
 
 $OSVersion = 'Windows 10'
 $OSReleaseID = "22H2"
