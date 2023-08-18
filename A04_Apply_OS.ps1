@@ -32,7 +32,26 @@ function Write-Log {
 }
 
 #Apply Image
+$FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
+	if($FindUSBVolume -ne $null)
+ 		{
+   			$FindUSBVolume = ($FindUSBVolume.DriveLetter+":")
+      		}
+	Else
+ 		{
+			$FindUSBVolume = $False
+   		}
 
+	if ($FindUSBVolume -ne $False)
+ 		{
+			$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+			$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
+   		}
+	Else
+ 		{
+			$data = "W:"
+   		}
+     
 $imagefolder = ls "$data\OS"
 $imagefile = $imagefolder.Name
 $imagefile = "$data\OS\" + $imagefile
