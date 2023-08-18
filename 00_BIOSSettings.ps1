@@ -41,7 +41,7 @@ $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
 if(-not($Model -in $SupportModels))
 	{
  		Msgbox("This device is not a support model. Press OK to acknowledge and shutdown.")
-		wpeutil shutdown
+		#wpeutil shutdown
 	}
 
 
