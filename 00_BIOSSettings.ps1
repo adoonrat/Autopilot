@@ -11,7 +11,7 @@ function Msgbox ($msg)
 
       'OK' {
           	## Action Here
-            Write-Host "Sata mode not set to Ahci, review all BIOS settings. Rebooting...."
+            
 	          #wpeutil reboot
             # Exit 69
           }
