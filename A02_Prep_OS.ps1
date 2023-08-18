@@ -9,7 +9,7 @@ $dest = "C:\Dell"
 $stopwatch = [system.diagnostics.stopwatch]::StartNew()
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
-	if (Test-Path ($FindUSBVolume.DriveLetter+":")
+	if (Test-Path ($FindUSBVolume.DriveLetter+":"))
  		{
 			$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 			$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
