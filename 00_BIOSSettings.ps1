@@ -28,7 +28,7 @@ $SupportModels = @(
 "Latitude 7330",
 "Latitude 7340",
 "Precision 3550",
-"Precision 3560",
+#"Precision 3560",
 "Precision 3570",
 "Precision 3571",
 "Precision 3580"
