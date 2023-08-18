@@ -47,7 +47,10 @@ if(-not($Model -in $SupportModels))
 
 If ($SataMode -ne "Ahci")
     	{
+     		If ($SataMode -ne $null)
+		{
     		Msgbox("Sata mode is not set to Ahci, please review BIOS settings before attempting to deploy. Press OK to restart.")
     		wpeutil reboot
+      		}
 	}
 
