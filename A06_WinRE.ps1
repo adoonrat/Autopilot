@@ -19,7 +19,7 @@ catch {
     exit
 }
 
-
+<#
 
 #Copying Unattend.xml
 Write-Log "Copying Unattend.xml to c:\windows\system32\sysprep"
@@ -85,6 +85,7 @@ catch {
     exit
 }
 
+#>
 
 $stopwatch.Stop()
 $ts = $stopwatch.Elapsed
@@ -102,4 +103,4 @@ catch {
     exit
 }
 
-wpeutil reboot
+#wpeutil reboot
