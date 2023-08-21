@@ -1,23 +1,11 @@
 Start-Transcript x:\A03_Prep_Drivers.log
 
-#Add-Type -AssemblyName PresentationCore, PresentationFramework
-
-#Variable Section
-#$date = (Get-Date).ToString('yyyy-MM-dd')
-#$LogFilePath = $env:TEMP
-#$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-# $dest = "C:\Dell"
-#$stopwatch = [system.diagnostics.stopwatch]::StartNew()
 $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
 
-
-
-
 function Driver-Download {
     #Download Catalog file
-    #ipconfig
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	if($FindUSBVolume -ne $null)
@@ -38,7 +26,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
  		{
 			$data = "W:"
    		}
-    #$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
+     
     $source = "http://downloads.dell.com/catalog/DriverPackCatalog.cab"
     $catalog = "$data\Dell\DriverPackCatalog.cab"
     Write-host "Downloading driver catalog file from $source"
