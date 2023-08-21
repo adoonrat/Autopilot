@@ -1,11 +1,11 @@
-Add-Type -AssemblyName PresentationCore, PresentationFramework
-
+#Add-Type -AssemblyName PresentationCore, PresentationFramework
+Start-Transcript x:\A02_Prep_OS.log
 #Variable Section
-$date = (Get-Date).ToString('yyyy-MM-dd')
-$LogFilePath = $env:TEMP
-$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-$dest = "C:\Dell"
-$stopwatch = [system.diagnostics.stopwatch]::StartNew()
+#$date = (Get-Date).ToString('yyyy-MM-dd')
+#$LogFilePath = $env:TEMP
+#$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
+#$dest = "C:\Dell"
+#$stopwatch = [system.diagnostics.stopwatch]::StartNew()
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	if($FindUSBVolume -ne $null)
@@ -27,29 +27,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 			$data = "W:"
    		}
 
-#Functions
-function Write-Log {
 
-    Param (
-        [Parameter(Mandatory = $true)]
-        [string]$Message,
-        [switch]$fail
-    )
-	
-    If ((Test-Path $LogFilePath) -eq $false) {
-        mkdir $LogFilePath
-    }
-	
-    $time = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-    $time + '...' + $Message | Out-File -FilePath $logfilename -Append
-    if ($fail) {
-        Write-Host $Message -ForegroundColor Red
-    }
-    else {
-        Write-Host $Message
-    }
-
-}
 
 $OSVersion = 'Windows 10'
 $OSReleaseID = "22H2"
