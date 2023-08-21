@@ -68,8 +68,11 @@ catch {
 
 #Coping Log Files
 try {
-    write-host "Copying logs to C:\Temp"
-    copy-item "x:\logs\*.log" "W:\Temp"-Force -Recurse -ErrorAction Stop
+    write-host "Copying logs to C:\Temp\OSDLogs"
+    if (!(Test-Path "W:\Temp\OSDLogs")) {
+    mkdir "W:\Temp\OSDLogs"
+}
+    copy-item "x:\logs\*.log" "W:\Temp\OSDLogs"-Force -Recurse -ErrorAction Stop
 }
 catch {
     write-host "Ran into an issue: $PSItem" -fail
