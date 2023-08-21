@@ -98,7 +98,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     $Filename = [System.IO.Path]::GetFileName($cabsource)
 
     $folder = $data + "\Dell\$model"
-    $destination = $data + "\Dell\$model\" #+ $Filename
+    $destination = $data + "\Dell\$model\" + $Filename
 
     Write-Log "Destination download location: $destination"
 
@@ -133,7 +133,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
         try {
             Write-Log "Driver cab missing from USB. Downloading Dell Driver pack for $model..."
             #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
-	    Save-WebFile -SourceUrl $cabsource -DestinationDirectory $destination -ErrorAction Stop
+	    Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
         }
         catch {
             write-log "Ran into an issue: $PSItem" -fail
