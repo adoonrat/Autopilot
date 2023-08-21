@@ -1,4 +1,4 @@
-Start-Transcript x:\A04_Apply_OS.log
+Start-Transcript x:\logs\A04_Apply_OS.log
 
 #Apply Image
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
