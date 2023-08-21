@@ -37,7 +37,7 @@ function Write-Log {
 
 function Driver-Download {
     #Download Catalog file
-    ipconfig
+    #ipconfig
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	if($FindUSBVolume -ne $null)
