@@ -58,7 +58,7 @@ try {
 "@
 
 $Unattended.Save("x:\unattend.xml")
-copy /y x:\unattend.xml w:\windows\system32\sysprep\
+Copy-Item -Path x:\unattend.xml -Destination w:\windows\system32\sysprep\ -Force
 }
 catch {
     write-host "Ran into an issue: $PSItem"
