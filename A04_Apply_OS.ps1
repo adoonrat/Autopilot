@@ -1,13 +1,4 @@
-#Add-Type -AssemblyName PresentationCore, PresentationFramework
 Start-Transcript x:\A04_Apply_OS.log
-#Variable Section
-#$date = (Get-Date).ToString('yyyy-MM-dd')
-#$LogFilePath = $env:TEMP
-#$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-#$data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
-#$boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
-
-
 
 #Apply Image
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
@@ -39,7 +30,7 @@ try {
     dism /Apply-Image /ImageFile:$imagefile /Index:6 /ApplyDir:W:\
 }
 catch {
-    Write-host "Ran into an issue: $PSItem" -fail
+    Write-host "Ran into an issue: $PSItem"
     exit
 }
 
@@ -55,7 +46,27 @@ try {
     W:\Windows\System32\bcdboot W:\Windows /s S:
 }
 catch {
-    Write-host "Ran into an issue: $PSItem" -fail
+    Write-host "Ran into an issue: $PSItem"
+    exit
+}
+
+try {
+    write-host "Copying WinRE" 
+    md R:\Recovery\WindowsRE
+    xcopy /h W:\Windows\System32\Recovery\Winre.wim R:\Recovery\WindowsRE\
+}
+catch {
+    write-host "Ran into an issue: $PSItem"
+    exit
+}
+
+# Register the location of the recovery tools 
+try {
+    write-host "Setting location of recovery tools"
+    W:\Windows\System32\Reagentc /Setreimage /Path R:\Recovery\WindowsRE /Target W:\Windows | out-null
+}
+catch {
+    write-host "Ran into an issue: $PSItem"
     exit
 }
 
