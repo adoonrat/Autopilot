@@ -1,4 +1,4 @@
-Start-Transcript x:\A01_ClearDisk.log
+Start-Transcript x:\logs\A01_ClearDisk.log
         
 Write-Host "Formatting Drive"
 $command = @"
