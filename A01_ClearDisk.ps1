@@ -1,4 +1,4 @@
-
+Start-Transcript x:\deployment.log
         
 Write-Host "Formatting Drive"
 $command = @"
