@@ -1,3 +1,12 @@
+Add-Type -AssemblyName PresentationCore, PresentationFramework
+
+#Variable Section
+$date = (Get-Date).ToString('yyyy-MM-dd')
+$LogFilePath = $env:TEMP
+$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
+# $dest = "C:\Dell"
+$stopwatch = [system.diagnostics.stopwatch]::StartNew()
+
 function Write-Log {
 
     Param (
