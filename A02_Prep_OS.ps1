@@ -1,4 +1,4 @@
-Start-Transcript x:\A02_Prep_OS.log
+Start-Transcript x:\logs\A02_Prep_OS.log
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	if($FindUSBVolume -ne $null)
