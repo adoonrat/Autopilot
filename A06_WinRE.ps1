@@ -119,7 +119,7 @@ catch {
     exit
 }
 
-#>
+
 
 $stopwatch.Stop()
 $ts = $stopwatch.Elapsed
@@ -136,5 +136,5 @@ catch {
     write-log "Ran into an issue: $PSItem" -fail
     exit
 }
-
+#>
 #wpeutil reboot
