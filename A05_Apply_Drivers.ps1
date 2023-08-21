@@ -19,3 +19,5 @@ Start-Transcript x:\A05_Apply_Drivers.log
         write-host "Ran into an issue: $PSItem" 
         exit
     }
+
+Stop-Transcript
