@@ -1,5 +1,4 @@
-Start-Transcript x:\A01_ClearDisk.log
-
+Start-Transcript x:\A06_Finalization.log
 
 #Copying Unattend.xml
 write-host "Copying Unattend.xml to c:\windows\system32\sysprep"
