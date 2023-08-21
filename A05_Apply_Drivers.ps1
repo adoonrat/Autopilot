@@ -1,4 +1,4 @@
-Start-Transcript x:\A05_Apply_Drivers.log
+Start-Transcript x:\logs\A05_Apply_Drivers.log
 
 #Add-Type -AssemblyName PresentationCore, PresentationFramework
 
