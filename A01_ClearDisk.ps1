@@ -1,4 +1,4 @@
-Start-Transcript x:\deployment.log
+Start-Transcript x:\A01_ClearDisk.log
         
 Write-Host "Formatting Drive"
 $command = @"
@@ -22,3 +22,5 @@ list volume
 exit
 "@
 $command | Diskpart
+
+Stop-Transcript
