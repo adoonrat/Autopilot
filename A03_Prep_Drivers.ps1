@@ -98,7 +98,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     $Filename = [System.IO.Path]::GetFileName($cabsource)
 
     $folder = $data + "\Dell\$model"
-    $destination = $data + "\Dell\$model\" + $Filename
+    $destination = $data + "\Dell\$model\" #+ $Filename
 
     Write-Log "Destination download location: $destination"
 
