@@ -168,3 +168,6 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 
 
 Driver-Download
+
+
+Stop-Transcript
