@@ -1,4 +1,4 @@
-Start-Transcript x:\A03_Prep_Drivers.log
+Start-Transcript x:\logs\A03_Prep_Drivers.log
 
 $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
