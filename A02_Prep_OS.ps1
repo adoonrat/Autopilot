@@ -1,11 +1,4 @@
-#Add-Type -AssemblyName PresentationCore, PresentationFramework
 Start-Transcript x:\A02_Prep_OS.log
-#Variable Section
-#$date = (Get-Date).ToString('yyyy-MM-dd')
-#$LogFilePath = $env:TEMP
-#$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-#$dest = "C:\Dell"
-#$stopwatch = [system.diagnostics.stopwatch]::StartNew()
 
 $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	if($FindUSBVolume -ne $null)
