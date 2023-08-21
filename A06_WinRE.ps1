@@ -1,36 +1,5 @@
 Start-Transcript x:\A01_ClearDisk.log
 
-#Add-Type -AssemblyName PresentationCore, PresentationFramework
-
-#Variable Section
-#$date = (Get-Date).ToString('yyyy-MM-dd')
-#$LogFilePath = $env:TEMP
-#$logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-# $dest = "C:\Dell"
-#$stopwatch = [system.diagnostics.stopwatch]::StartNew()
-
-# Copy the Windows RE image to the    Windows RE Tools partition
-try {
-    write-host "Copying WinRE" 
-    md R:\Recovery\WindowsRE
-    xcopy /h W:\Windows\System32\Recovery\Winre.wim R:\Recovery\WindowsRE\
-}
-catch {
-    write-host "Ran into an issue: $PSItem"
-    exit
-}
-
-# Register the location of the recovery tools 
-try {
-    write-host "Setting location of recovery tools"
-    W:\Windows\System32\Reagentc /Setreimage /Path R:\Recovery\WindowsRE /Target W:\Windows | out-null
-}
-catch {
-    write-host "Ran into an issue: $PSItem"
-    exit
-}
-
-<#
 
 #Copying Unattend.xml
 write-host "Copying Unattend.xml to c:\windows\system32\sysprep"
@@ -89,21 +58,14 @@ try {
 </unattend>
 "@
 
-$Unattended.Save("w:\windows\system32\sysprep\unattend.xml")
+$Unattended.Save("x:\unattend.xml")
 }
 catch {
     write-host "Ran into an issue: $PSItem" -fail
     exit
 }
 
-
-
-$stopwatch.Stop()
-$ts = $stopwatch.Elapsed
-$elapsedTime = [string]::Format( "{0:00} min. {1:00}.{2:00} sec.", $ts.Minutes, $ts.Seconds, $ts.Milliseconds / 10 )
-write-host "Time Elapsed:  $elapsedTime"
-
-
+<#
 #Coping Log Files
 try {
     write-host "Copying logs to C:\Temp"
