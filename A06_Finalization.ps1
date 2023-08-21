@@ -1,4 +1,4 @@
-Start-Transcript x:\A06_Finalization.log
+Start-Transcript x:\logs\A06_Finalization.log
 
 #Copying Unattend.xml
 write-host "Copying Unattend.xml to c:\windows\system32\sysprep"
@@ -65,16 +65,16 @@ catch {
     exit
 }
 
-<#
+
 #Coping Log Files
 try {
     write-host "Copying logs to C:\Temp"
-    copy-item "$env:TEMP\*" "W:\Temp"-Force -Recurse -ErrorAction Stop
+    copy-item "x:\logs\*.log" "W:\Temp"-Force -Recurse -ErrorAction Stop
 }
 catch {
     write-host "Ran into an issue: $PSItem" -fail
     exit
 }
-#>
+
 #wpeutil reboot
 Stop-Transcript
