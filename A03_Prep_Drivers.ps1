@@ -4,7 +4,7 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
 $date = (Get-Date).ToString('yyyy-MM-dd')
 $LogFilePath = $env:TEMP
 $logfilename = "$LogFilePath\$date" + "_ImageApply.log"
-$dest = "C:\Dell"
+# $dest = "C:\Dell"
 $stopwatch = [system.diagnostics.stopwatch]::StartNew()
 $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
@@ -132,8 +132,8 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
         }
         try {
             Write-Log "Driver cab missing from USB. Downloading Dell Driver pack for $model..."
-            #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
-	    Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
+            Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
+	    #Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
         }
         catch {
             write-log "Ran into an issue: $PSItem" -fail
