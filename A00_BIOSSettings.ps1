@@ -3,6 +3,8 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 Import-Module DellBIOSProvider
 Import-Module OSD
 
+Start-Transcript x:\A00_BIOSSettings.log
+
 Add-Type -AssemblyName PresentationFramework
 $SataMode = dir DellSmbios:\SystemConfiguration\EmbSataRaid | Select -ExpandProperty CurrentValue
 
