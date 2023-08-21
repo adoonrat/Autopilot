@@ -111,7 +111,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
         if ($hash.hash -ne $cabSelected.hashMD5) {
             try {
                 Write-Log "Hashes don't match, redownloading Dell Driver pack for $model to $folder..."
-		rd /s /q $folder
+		rd $folder /s /q
                 #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
 		Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
                 $hash = Get-FileHash $destination -Algorithm MD5
