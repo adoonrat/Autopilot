@@ -40,16 +40,6 @@ try {
                     <Path>reg add HKLM\Software\Policies\Microsoft\Windows\CloudContent /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f</Path>
                     <Order>2</Order>
                 </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Description>DISABLE_UAC_EnableLUA</Description>
-                    <Path>cmd /c reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f</Path>
-                    <Order>3</Order>
-                </RunSynchronousCommand>
-                <!--RunSynchronousCommand wcm:action="add">
-                    <Path>Dism /online /enable-feature /featurename:NetFX3 /All /Source:C:\Temp\sxs /LimitAccess</Path>
-                    <Order>4</Order>
-                    <Description>DISM .net</Description>
-                </RunSynchronousCommand-->
             </RunSynchronous>
         </component>
     </settings>
