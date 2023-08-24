@@ -70,5 +70,5 @@ catch {
     exit
 }
 
-#wpeutil reboot
 Stop-Transcript
+wpeutil reboot
