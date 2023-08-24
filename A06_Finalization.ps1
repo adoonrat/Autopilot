@@ -1,5 +1,6 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
+<#
 #Copying Unattend.xml
 write-host "Copying Unattend.xml to c:\windows\system32\sysprep"
 $unattend = "$boot\unattend.xml"
@@ -55,7 +56,7 @@ catch {
     exit
 }
 
-
+#>
 #Coping Log Files
 try {
     write-host "Copying logs to C:\Temp\OSDLogs"
