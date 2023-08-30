@@ -51,6 +51,7 @@ If($FileName -eq $OSCache.Name)
        	}
     	Else
     	{
+     		Write-Host "Size Dif by $Dif"
      		Write-Host "Delete an old image" -ForegroundColor Yellow
         	Remove-Item -Path $OSCacheLocation -Recurse -Force
         	Write-Host "Download Latest image" -ForegroundColor Yellow
