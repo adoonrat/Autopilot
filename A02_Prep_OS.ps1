@@ -44,8 +44,16 @@ $OSCache = ls $OSCacheLocation
 If($FileName -eq $OSCache.Name)
     {
        	$CacheSize = ($OSCache.Length)/1MB
-   	$Dif = [math]::Round($CacheSize) - $GetInfo.SizeMB
-    	If($Dif -lt 1)
+	$CacheSize = [math]::Round($CacheSize)
+	Write-Host "CacheSize is $CacheSize"
+ 	Write-Host "CloudSize is $GetInfo.SizeMB"
+  	
+   	If($CacheSize -gt $GetInfo.SizeMB)
+   		{$Dif = $CacheSize - $GetInfo.SizeMB}
+    	Else
+     		{$Dif = $GetInfo.SizeMB - $CacheSize}
+    	
+     	If($Dif -lt 1)
     	{
      		Write-Host "Cache Image is a good version" -ForegroundColor Green
        	}
