@@ -1,25 +1,21 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
-$OSCacheLocation = "W:\OS\"
-$DriverCABLocation = "W:\Dell"
-$DriverCacheLocation = "W:\Drivers"
-
-If(Test-Path -Path $OSCacheLocation)
+If(Test-Path -Path "W:\OS\")
     {
         Write-Host "Clear local OSCache" -ForegroundColor Yellow
-        rd /s /q $OSCacheLocation
+        rd /s /q "W:\OS\"
     }
 
-If(Test-Path -Path $DriverCABLocation)
+If(Test-Path -Path "W:\Dell")
     {
         Write-Host "Clear local Driver CAB" -ForegroundColor Yellow
-        rd /s /q $DriverCABLocation
+        rd /s /q "W:\Dell"
     }
 
-If(Test-Path -Path $DriverCacheLocation)
+If(Test-Path -Path "W:\Drivers")
     {
         Write-Host "Clear local Driver Cache" -ForegroundColor Yellow
-        rd /s /q $DriverCacheLocation
+        rd /s /q "W:\Drivers"
     }
 
 
