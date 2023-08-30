@@ -37,7 +37,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
         Invoke-WebRequest -URi $source -OutFile $catalog -Verbose
     }
     catch {
-        Write-host -Message "Error downloading dell catalog file. Error: $PSItem "
+        Write-host -Message "Error downloading dell catalog file. Error: $PSItem " -ForegroundColor Red
         exit
                 
     }
@@ -48,7 +48,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
         EXPAND $catalog $catalogXMLFile
     }
     catch {
-        Write-host "Error Expanding catalog cab file. Error: $PSItem"
+        Write-host "Error Expanding catalog cab file. Error: $PSItem" -ForegroundColor Red
         exit
     }
 
@@ -56,43 +56,43 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     #Find Model Info
     [xml]$catalogXMLDoc = Get-Content $catalogXMLFile
     $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
-    Write-host "Model: $model"
-    Write-host "Parsing catalog xml to get model specific driver CAB and download URL"
+    Write-host "Model: $model" -ForegroundColor Yellow
+    Write-host "Parsing catalog xml to get model specific driver CAB and download URL"  -ForegroundColor Yellow
     $cabSelected = $catalogXMLDoc.DriverPackManifest.DriverPackage | ? { ($_.SupportedSystems.Brand.Model.name -eq "$model") -and ($_.type -eq "Win") -and ($_.SupportedOperatingSystems.OperatingSystem.osCode -eq "Windows10" ) } | sort type
 
     #Cab Information
     $cabsource = "http://" + $catalogXMLDoc.DriverPackManifest.baseLocation + "/" + $cabSelected.path
-    Write-host "Source Cab download location: $cabsource"
+    Write-host "Source Cab download location: $cabsource" -ForegroundColor Yellow
     $Filename = [System.IO.Path]::GetFileName($cabsource)
 
     $folder = $data + "\Dell\$model"
     $destination = $data + "\Dell\$model\" + $Filename
 
-    Write-host "Destination download location: $destination"
+    Write-host "Destination download location: $destination"  -ForegroundColor Yellow
 
     if (Test-Path $destination) {
-        Write-host "$destination file already exists. Checking file hash"
+        Write-host "$destination file already exists. Checking file hash" -ForegroundColor Yellow
         $hash = Get-FileHash $destination -Algorithm MD5
-        Write-host "Original MD5 hash: $(@($cabSelected.hashMD5))"
-        Write-host "Current MD5 file hash: $(@($hash.hash))"
+        Write-host "Original MD5 hash: $(@($cabSelected.hashMD5))" -ForegroundColor Yellow
+        Write-host "Current MD5 file hash: $(@($hash.hash))" -ForegroundColor Yellow
 
         if ($hash.hash -ne $cabSelected.hashMD5) {
             try {
-                Write-host "Hashes don't match, redownloading Dell Driver pack for $model to $folder..."
+                Write-host "Hashes don't match, redownloading Dell Driver pack for $model to $folder..." -ForegroundColor Red
 		rd $folder /s /q
                 #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
 		Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
                 $hash = Get-FileHash $destination -Algorithm MD5
-                Write-host "Updated file hash: $(@($hash.hash))"
+                Write-host "Updated file hash: $(@($hash.hash))"  -ForegroundColor Yellow
             }
             catch {
-                Write-host "Ran into an issue: $PSItem"
+                Write-host "Ran into an issue: $PSItem"  -ForegroundColor Red
                 exit
             }
 
         }
         else {
-            Write-host "Hashes match. No need to re-download."
+            Write-host "Hashes match. No need to re-download." -ForegroundColor Green
         }
 
     }
@@ -106,7 +106,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 	    Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
         }
         catch {
-            Write-host "Ran into an issue: $PSItem"
+            Write-host "Ran into an issue: $PSItem" -ForegroundColor Red
             exit
         }
 
@@ -116,7 +116,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 
     $global:foldermodel = "W:\Drivers"
     if (!(test-path "$global:foldermodel")) {
-        Write-host "Extracting Dell Cab to W:\Drivers" #Note it's W:\ in WinPE
+        Write-host "Extracting Dell Cab to W:\Drivers" -ForegroundColor Yellow
         mkdir $global:foldermodel | out-null
         EXPAND $destination -F:* $global:foldermodel | Out-Null
     }
