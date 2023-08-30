@@ -63,6 +63,12 @@ If($FileName -eq $OSCache.Name)
         	Write-Host "Download Latest image" -ForegroundColor Yellow
         	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
    	}
-    
+Else
+{
+	Write-Host "No OS image in cache or not a good version" -ForegroundColor Yellow
+	Remove-Item -Path $OSCacheLocation -Recurse -Force
+	Write-Host "Download Latest image" -ForegroundColor Yellow
+	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+   	}
     }
     
