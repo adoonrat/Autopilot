@@ -81,7 +81,9 @@ catch {
 }
 
 #>
+Stop-Transcript
 #Coping Log Files
+
 try {
     write-host "Copying logs to C:\Temp\OSDLogs" -ForegroundColor Yellow
     if (!(Test-Path "W:\Temp\OSDLogs")) {
@@ -94,5 +96,5 @@ catch {
     exit
 }
 
-Stop-Transcript
+
 wpeutil reboot
