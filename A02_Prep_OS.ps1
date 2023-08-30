@@ -45,13 +45,14 @@ If($FileName -eq $OSCache.Name)
     {
        	$CacheSize = ($OSCache.Length)/1MB
 	$CacheSize = [math]::Round($CacheSize)
+ 	$CloudSize = $GetOSInfo.SizeMB
 	Write-Host "CacheSize is $CacheSize"
- 	Write-Host "CloudSize is $GetInfo.SizeMB"
+ 	Write-Host "CloudSize is $GetOSInfo.SizeMB"
   	
-   	If($CacheSize -gt $GetInfo.SizeMB)
-   		{$Dif = $CacheSize - $GetInfo.SizeMB}
+   	If($CacheSize -gt $CloudSize)
+   		{$Dif = $CacheSize - $CloudSize}
     	Else
-     		{$Dif = $GetInfo.SizeMB - $CacheSize}
+     		{$Dif = $CloudSize - $CacheSize}
     	
      	If($Dif -lt 1)
     	{
