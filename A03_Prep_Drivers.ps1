@@ -71,7 +71,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     Write-host "Destination download location: $destination"  -ForegroundColor Yellow
 
     if (Test-Path $destination) {
-        Write-host "$destination file already exists. Checking file hash" -ForegroundColor Yellow
+        Write-host "$destination file already exists. Checking file hash ..." -ForegroundColor Yellow
         $hash = Get-FileHash $destination -Algorithm MD5
         Write-host "Original MD5 hash: $(@($cabSelected.hashMD5))" -ForegroundColor Yellow
         Write-host "Current MD5 file hash: $(@($hash.hash))" -ForegroundColor Yellow
