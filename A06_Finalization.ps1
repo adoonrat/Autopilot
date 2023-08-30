@@ -1,5 +1,29 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
+$OSCacheLocation = "W:\OS\"
+$DriverCABLocation = "W:\Dell"
+$DriverCacheLocation = "W:\Drivers"
+
+If(Test-Path -Path $OSCacheLocation)
+    {
+        Write-Host "Clear local OSCache" -ForegroundColor Yellow
+        rd /s /q $OSCacheLocation
+    }
+
+If(Test-Path -Path $DriverCABLocation)
+    {
+        Write-Host "Clear local Driver CAB" -ForegroundColor Yellow
+        rd /s /q $DriverCABLocation
+    }
+
+If(Test-Path -Path $DriverCacheLocation)
+    {
+        Write-Host "Clear local Driver Cache" -ForegroundColor Yellow
+        rd /s /q $DriverCacheLocation
+    }
+
+
+
 <#
 #Copying Unattend.xml
 write-host "Copying Unattend.xml to c:\windows\system32\sysprep"
@@ -59,14 +83,14 @@ catch {
 #>
 #Coping Log Files
 try {
-    write-host "Copying logs to C:\Temp\OSDLogs"
+    write-host "Copying logs to C:\Temp\OSDLogs" -ForegroundColor Yellow
     if (!(Test-Path "W:\Temp\OSDLogs")) {
     mkdir "W:\Temp\OSDLogs"
 }
     copy-item "x:\logs\*.log" "W:\Temp\OSDLogs"-Force -Recurse -ErrorAction Stop
 }
 catch {
-    write-host "Ran into an issue: $PSItem" -fail
+    write-host "Ran into an issue: $PSItem" -ForegroundColor Red
     exit
 }
 
