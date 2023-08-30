@@ -42,7 +42,14 @@ If(!(Test-Path -Path $OSCacheLocation))
 $OSCache = ls $OSCacheLocation
 
 If($FileName -eq $OSCache.Name)
-    {Write-Host "Cache Image is a good version"}
+    {
+       	$CacheSize = ($OSCache.Length)/1MB
+   	$Dif = [math]::Round($CacheSize) - $GetInfo.SizeMB
+    	If($Dif -lt 1)
+    	{Write-Host "Cache Image is a good version"}
+    
+    
+    }
     Else
     {
         Remove-Item -Path $OSCacheLocation -Recurse -Force
