@@ -1,6 +1,6 @@
 Start-Transcript x:\logs\A01_ClearDisk.log
         
-Write-Host "Formatting Drive"
+Write-Host "Formatting Drive" -ForegroundColor Yellow
 $command = @"
 select disk 0
 clean
