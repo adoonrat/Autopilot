@@ -46,13 +46,16 @@ If($FileName -eq $OSCache.Name)
        	$CacheSize = ($OSCache.Length)/1MB
    	$Dif = [math]::Round($CacheSize) - $GetInfo.SizeMB
     	If($Dif -lt 1)
-    	{Write-Host "Cache Image is a good version"}
-    
+    	{
+     		Write-Host "Cache Image is a good version" -ForegroundColor Green
+       	}
+    	Else
+    	{
+     		Write-Host "Delete an old image" -ForegroundColor Yellow
+        	Remove-Item -Path $OSCacheLocation -Recurse -Force
+        	Write-Host "Download Latest image" -ForegroundColor Yellow
+        	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+   	}
     
     }
-    Else
-    {
-        Remove-Item -Path $OSCacheLocation -Recurse -Force
-        Write-Host "Download Latest image"
-        Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
-    }
+    
