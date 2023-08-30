@@ -46,9 +46,7 @@ If($FileName -eq $OSCache.Name)
        	$CacheSize = ($OSCache.Length)/1MB
 	$CacheSize = [math]::Round($CacheSize)
  	$CloudSize = $GetOSInfo.SizeMB
-	Write-Host "CacheSize is $CacheSize"
- 	Write-Host "CloudSize is $GetOSInfo.SizeMB"
-  	
+	  	
    	If($CacheSize -gt $CloudSize)
    		{$Dif = $CacheSize - $CloudSize}
     	Else
@@ -60,7 +58,6 @@ If($FileName -eq $OSCache.Name)
        	}
     	Else
     	{
-     		Write-Host "Size Dif by $Dif"
      		Write-Host "Delete an old image" -ForegroundColor Yellow
         	Remove-Item -Path $OSCacheLocation -Recurse -Force
         	Write-Host "Download Latest image" -ForegroundColor Yellow
