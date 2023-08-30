@@ -20,8 +20,15 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
 			$data = "W:"
    		}
 
-
-
+### Check Remaining space ###
+If($data -ne "W:")
+{
+	$RemainSpace = ((Get-Volume $data.Substring(0,1) | Select-Object SizeRemaining).SizeRemaining)/1GB
+	If($RemainSpace -lt 15)
+		{
+			Write-Host "USB Remaining Space is low, you may encounter issue downloading OSImage or new drivers. Please consider to clear some unused Drivers in folder Dell in DATA partition." -ForegroundColor Red
+  		}
+}
 $OSVersion = 'Windows 10'
 $OSReleaseID = "22H2"
 
