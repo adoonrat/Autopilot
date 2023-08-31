@@ -1,5 +1,6 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
+<#
 If(Test-Path -Path "W:\OS\")
     {
         Write-Host "Clear local OSCache" -ForegroundColor Yellow
@@ -17,8 +18,7 @@ If(Test-Path -Path "W:\Drivers")
         Write-Host "Clear local Driver Cache" -ForegroundColor Yellow
         rd /s /q "W:\Drivers"
     }
-
-
+#>
 
 <#
 #Copying Unattend.xml
