@@ -112,4 +112,4 @@ catch {
 }
 
 
-wpeutil reboot
+#wpeutil reboot
