@@ -1,48 +1,24 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
-If(Test-Path -Path "W:\Windows\Setup\Scripts")
-{
-   mkdir W:\Windows\Setup\Scripts
-}
-   
-$SetupComplete = @("
 
-if exist C:\OS (
-   rd /s /q C:\OS\
-   
-   )
-if exist C:\Dell
-   rd /s /q C:\Dell
-   
-   )
-if exist C:\Drivers
-   rd /s /q C:\Drivers
-   
-")
-
-Write-Output $SetupComplete | Out-File W:\Windows\Setup\Scripts\SetupComplete.cmd
-
-
-
-<#
 If(Test-Path -Path "W:\OS\")
     {
         Write-Host "Clear local OSCache" -ForegroundColor Yellow
-        rd /s /q "W:\OS\"
+        Remove-Item 'W:\OS\' -Recurse
     }
 
 If(Test-Path -Path "W:\Dell")
     {
         Write-Host "Clear local Driver CAB" -ForegroundColor Yellow
-        rd /s /q "W:\Dell"
+        Remove-Item 'W:\Dell\' -Recurse
     }
 
 If(Test-Path -Path "W:\Drivers")
     {
         Write-Host "Clear local Driver Cache" -ForegroundColor Yellow
-        rd /s /q "W:\Drivers"
+        Remove-Item 'W:\Drivers\' -Recurse
     }
-#>
+
 
 <#
 #Copying Unattend.xml
