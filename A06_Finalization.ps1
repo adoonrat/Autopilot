@@ -1,5 +1,10 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
+If(Test-Path -Path "W:\Windows\Setup\Scripts")
+{
+   mkdir W:\Windows\Setup\Scripts
+}
+   
 $SetupComplete = @("
 
 if exist C:\OS (
