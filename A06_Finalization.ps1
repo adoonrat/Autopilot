@@ -1,5 +1,24 @@
 Start-Transcript x:\logs\A06_Finalization.log
 
+$SetupComplete = @("
+
+if exist C:\OS (
+   rd /s /q C:\OS\
+   echo "Delete C:\OS" >> C:\temp\OSDLogs\complete.log
+   )
+if exist C:\Dell
+   rd /s /q C:\Dell
+   echo "Delete C:\Dell" >> C:\temp\OSDLogs\complete.log
+   )
+if exist C:\Drivers
+   rd /s /q C:\Drivers
+   echo "Delete C:\Drivers" >> C:\temp\OSDLogs\complete.log
+")
+
+Write-Output $SetupComplete | Out-File W:\Windows\Setup\Scripts\SetupComplete.cmd
+
+
+
 <#
 If(Test-Path -Path "W:\OS\")
     {
