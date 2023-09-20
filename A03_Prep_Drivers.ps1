@@ -3,6 +3,7 @@ Start-Transcript x:\logs\A03_Prep_Drivers.log
 $data = (get-volume | Where FileSystemLabel -eq "DATA").DriveLetter + ":"
 $boot = (get-volume | Where FileSystemLabel -eq "BOOT").DriveLetter + ":"
 
+$OSVersion = "Windows 10"
 
 function Driver-Download {
     #Download Catalog file
@@ -58,7 +59,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
     Write-host "Model: $model" -ForegroundColor Yellow
     Write-host "Parsing catalog xml to get model specific driver CAB and download URL"  -ForegroundColor Yellow
-    $cabSelected = $catalogXMLDoc.DriverPackManifest.DriverPackage | ? { ($_.SupportedSystems.Brand.Model.name -eq "$model") -and ($_.type -eq "Win") -and ($_.SupportedOperatingSystems.OperatingSystem.osCode -eq "Windows10" ) } | sort type
+    $cabSelected = $catalogXMLDoc.DriverPackManifest.DriverPackage | ? { ($_.SupportedSystems.Brand.Model.name -eq "$model") -and ($_.type -eq "Win") -and ($_.SupportedOperatingSystems.OperatingSystem.osCode -eq $OSVersion ) } | sort type
 
     #Cab Information
     $cabsource = "http://" + $catalogXMLDoc.DriverPackManifest.baseLocation + "/" + $cabSelected.path
