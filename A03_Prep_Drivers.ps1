@@ -80,8 +80,8 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
             try {
                 Write-host "Hashes don't match, redownloading Dell Driver pack for $model to $folder..." -ForegroundColor Red
 		rd $folder /s /q
-                #Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
-		Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
+                Invoke-WebRequest -URi $cabsource -OutFile $destination -UseBasicParsing
+		#Save-WebFile -SourceUrl $cabsource -DestinationDirectory $folder -ErrorAction Stop
                 $hash = Get-FileHash $destination -Algorithm MD5
                 Write-host "Updated file hash: $(@($hash.hash))"  -ForegroundColor Yellow
             }
