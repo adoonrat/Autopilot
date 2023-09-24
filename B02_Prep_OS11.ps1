@@ -29,7 +29,7 @@ If($data -ne "W:")
 			Write-Host "USB DATA partition Remaining Space is low, you may encounter issue downloading OS Image or new drivers. Please consider to clear some unused Drivers in folder Dell." -ForegroundColor Red
   		}
 }
-$OSVersion = 'Windows 10'
+$OSVersion = 'Windows 11'
 $OSReleaseID = "22H2"
 
 $GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
