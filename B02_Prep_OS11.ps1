@@ -32,10 +32,10 @@ If($data -ne "W:")
 $OSVersion = 'Windows 11'
 $OSReleaseID = "23H2"
 
-$GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+$GetOSInfo = Get-FeatureUpdate -OSVersion $OSVersion -OSReleaseID $OSReleaseID -OSArchitecture x64 -OSActivation Volume -OSLanguage en-us #| Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
 
-$FileUri = $GetOSInfo.FileUri.AbsoluteUri
-$FileName = $GetOSInfo.FileName
+$FileUri = $GetOSInfo.Url
+$FileName = $GetOSInfo.Name
 
 
 $OSCacheLocation = "$data\OS\"
@@ -68,19 +68,16 @@ If($FileName -eq $OSCache.Name)
      		Write-Host "Delete an old image" -ForegroundColor Yellow
         	Remove-Item -Path $OSCacheLocation -Recurse -Force
         	Write-Host "Download Latest image" -ForegroundColor Yellow
-        	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
-	 	$File = "$OSCacheLocation\$FileName"
-	 	Invoke-WebRequest -URi $FileUri -OutFile $File -UseBasicParsing
-   	}
+        	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+	 }
     }
 Else
     {
 	Write-Host "No OS image in cache or not a good version" -ForegroundColor Yellow
 	Remove-Item -Path $OSCacheLocation -Recurse -Force
 	Write-Host "Download Latest image" -ForegroundColor Yellow
-	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
- 	$File = "$OSCacheLocation\$FileName"
-	Invoke-WebRequest -URi $FileUri -OutFile $File -UseBasicParsing
+	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+ 	
    	}
     
     
