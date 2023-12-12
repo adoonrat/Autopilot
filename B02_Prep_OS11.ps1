@@ -68,7 +68,9 @@ If($FileName -eq $OSCache.Name)
      		Write-Host "Delete an old image" -ForegroundColor Yellow
         	Remove-Item -Path $OSCacheLocation -Recurse -Force
         	Write-Host "Download Latest image" -ForegroundColor Yellow
-        	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+        	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+	 	$File = "$OSCacheLocation\$FileName"
+	 	Invoke-WebRequest -URi $FileUri -OutFile $File -Verbose
    	}
     }
 Else
@@ -76,7 +78,9 @@ Else
 	Write-Host "No OS image in cache or not a good version" -ForegroundColor Yellow
 	Remove-Item -Path $OSCacheLocation -Recurse -Force
 	Write-Host "Download Latest image" -ForegroundColor Yellow
-	Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
+ 	$File = "$OSCacheLocation\$FileName"
+	Invoke-WebRequest -URi $FileUri -OutFile $File -Verbose
    	}
     
     
