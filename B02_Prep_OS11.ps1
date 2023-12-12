@@ -70,7 +70,7 @@ If($FileName -eq $OSCache.Name)
         	Write-Host "Download Latest image" -ForegroundColor Yellow
         	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
 	 	$File = "$OSCacheLocation\$FileName"
-	 	Invoke-WebRequest -URi $FileUri -OutFile $File -Verbose
+	 	Invoke-WebRequest -URi $FileUri -OutFile $File -UseBasicParsing
    	}
     }
 Else
@@ -80,7 +80,7 @@ Else
 	Write-Host "Download Latest image" -ForegroundColor Yellow
 	#Save-WebFile -SourceUrl $FileUri -DestinationDirectory $OSCacheLocation -DestinationName $FileName -ErrorAction Stop
  	$File = "$OSCacheLocation\$FileName"
-	Invoke-WebRequest -URi $FileUri -OutFile $File -Verbose
+	Invoke-WebRequest -URi $FileUri -OutFile $File -UseBasicParsing
    	}
     
     
