@@ -58,7 +58,7 @@ $FindUSBVolume = Get-Volume | Where FileSystemLabel -eq "DATA"
     $Model = $((Get-WmiObject -Class Win32_ComputerSystem).Model).Trim()
     Write-host "Model: $model" -ForegroundColor Yellow
     Write-host "Parsing catalog xml to get model specific driver CAB and download URL"  -ForegroundColor Yellow
-    $cabSelected = $catalogXMLDoc.DriverPackManifest.DriverPackage | ? { ($_.SupportedSystems.Brand.Model.name -eq "$model") -and ($_.type -eq "Win") -and ($_.SupportedOperatingSystems.OperatingSystem.osCode -eq "Windows10" ) } | sort type
+    $cabSelected = $catalogXMLDoc.DriverPackManifest.DriverPackage | ? { ($_.SupportedSystems.Brand.Model.name -eq "$model") -and ($_.type -eq "Win") -and ($_.SupportedOperatingSystems.OperatingSystem.osCode -eq "Windows11" ) } | sort type
 
     #Cab Information
     $cabsource = "http://" + $catalogXMLDoc.DriverPackManifest.baseLocation + "/" + $cabSelected.path
